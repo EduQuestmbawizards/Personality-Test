@@ -1,10 +1,8 @@
-langgraph
-langchain
-langchain-core
-
-dotenv
 flask
-pydantic
-playwright
+flask-cors
+langchain
+langchain-openai
 openai
+python-dotenv
+playwright
 gunicorn
