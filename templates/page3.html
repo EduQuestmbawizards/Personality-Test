@@ -1,0 +1,171 @@
+<style>
+
+/* PAGE RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page3 {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    background: #e6e6e6;
+    font-family: Arial, sans-serif;
+
+    overflow: hidden;
+    box-sizing: border-box;   
+}
+
+/* ================= STRIPS ================= */
+
+.page3 .strip {
+    position: absolute;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.page3 .top-strip { top: 0; }
+.page3 .bottom-strip { bottom: 0; }
+
+.page3 .strip div {
+    position: absolute;
+    height: 3mm;
+}
+
+.page3 .s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.page3 .s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.page3 .s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.page3 .s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.page3 .s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+/* ================= CONTENT (IMPROVED) ================= */
+
+/* ================= CONTENT (FINAL FIX) ================= */
+
+/* ================= CONTENT (FINAL FIX) ================= */
+
+.page3 .content {
+    position: absolute;
+
+    width: 160mm;              /* 🔥 wider (fix right side issue) */
+    left: 25mm;                /* (210 - 160)/2 */
+
+    top: 80mm;                 /* 🔥 better vertical balance */
+
+    text-align: center;
+}
+
+/* TITLE */
+.page3 .content h1 {
+    font-size: 10mm;           /* 🔥 bigger + cleaner */
+    font-weight: 900;
+    margin-bottom: 12mm;
+
+    line-height: 12mm;         /* 🔥 FIX overlapping */
+    letter-spacing: 0.8mm;
+
+    word-spacing: 2mm;         /* 🔥 improves readability */
+}
+
+/* TEXT */
+.page3 .content p {
+    font-size: 5mm;
+    line-height: 9mm;          /* 🔥 more breathing space */
+    color: #333;
+
+    padding: 0 5mm;            /* 🔥 prevents edge touching */
+}
+
+/* ================= DECORATIONS ================= */
+
+.page3 .circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* LEFT */
+.page3 .orange1 {
+    width: 20mm;
+    height: 20mm;
+    left: -8mm;
+    top: 60mm;
+    background: linear-gradient(to right, orange, red);
+}
+
+/* RIGHT */
+.page3 .red1 {
+    width: 25mm;
+    height: 25mm;
+    right: -10mm;
+    top: 100mm;
+    background: linear-gradient(to right, red, purple);
+}
+
+/* BOTTOM LEFT */
+.page3 .blue1 {
+    width: 22mm;
+    height: 22mm;
+    left: 20mm;
+    bottom: 40mm;
+    background: linear-gradient(to right, #3f5ea8, #6ec6ff);
+}
+
+/* SMALL */
+.page3 .small1 {
+    width: 12mm;
+    height: 12mm;
+    right: 25mm;
+    bottom: 60mm;
+    background: #42a5f5;
+}
+
+</style> 
+
+<div class="page3">
+
+    <!-- TOP STRIP -->
+    <div class="strip top-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+        <h1>FUTURISTIC INTERDISCIPLINARY CAREERS</h1>
+
+        <p>
+            Explore the forefront of interdisciplinary career possibilities.
+            This section reveals innovative career paths that blend diverse
+            skill sets and fields. Delve into the visionary roles transcending
+            traditional boundaries, revealing opportunities in cutting-edge
+            industries where multidisciplinary expertise is highly valued.
+        </p>
+    </div>
+
+    <!-- DECORATIONS -->
+    <div class="circle orange1"></div>
+    <div class="circle red1"></div>
+    <div class="circle blue1"></div>
+    <div class="circle small1"></div>
+
+    <!-- BOTTOM STRIP -->
+    <div class="strip bottom-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EduQuest Personality Test</title>
+
+    <style>
+        body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #F8FAFC;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #FFFFFF; /* FIXED (was grey) */
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2563EB;
+}
+
+/* Question card */
+.question {
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #FFFFFF; /* FIXED (was dark) */
+    border: 1px solid #E2E8F0;
+    transition: 0.2s;
+}
+
+.question:hover {
+    border-color: #2563EB;
+    box-shadow: 0px 5px 15px rgba(37, 99, 235, 0.1);
+}
+
+/* Question text */
+.question p {
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: #1E293B;
+}
+
+/* Options */
+label {
+    display: block;
+    padding: 10px 14px;
+    margin: 6px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    color: #334155;
+}
+
+/* Hover effect */
+label:hover {
+    background: #EFF6FF;
+}
+
+/* Radio button */
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Selected option highlight */
+input[type="radio"]:checked + span {
+    color: #2563EB;
+    font-weight: 600;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #2563EB, #1D4ED8);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 8px 20px rgba(37, 99, 235, 0.3);
+}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>EduQuest Personality Test</h1>
+
+    <form method="POST" action="/submit">
+
+        {% for q in questions %}
+        {% set q_index = loop.index %}
+
+        <div class="question">
+            <p>{{ q_index }}. {{ q.question }}</p>
+
+            {% for key, value in q.options.items() %}
+                {% set input_id = "q" ~ q_index ~ "_" ~ key %}
+
+                <label for="{{ input_id }}">
+                    <input 
+                        type="radio"
+                        id="{{ input_id }}"
+                        name="answers_{{ q_index }}"
+                        value="{{ key }}"
+                        required
+                    >
+                    {{ key }}. {{ value }}
+                </label>
+            {% endfor %}
+        </div>
+
+        {% endfor %}
+
+        <button type="submit">Generate My Report 🚀</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

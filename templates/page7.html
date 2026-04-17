@@ -1,0 +1,225 @@
+<style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #f7f7f7;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= TITLE ================= */
+
+.title {
+    position: absolute;
+    top: 20mm;
+    left: 20mm;
+
+    font-size: 7mm;
+    font-weight: 900;
+}
+
+.subtitle {
+    position: absolute;
+    top: 30mm;
+    left: 20mm;
+
+    font-size: 6mm;
+    font-weight: 900;
+}
+
+/* ================= BOOKS ================= */
+
+.content {
+    position: absolute;
+    top: 48mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* SECTION TITLE */
+.section-title {
+    color: #e53935;
+    font-weight: bold;
+    font-size: 4mm;
+    margin-bottom: 2mm;
+}
+
+/* LIST */
+ul {
+    padding-left: 5mm;
+    margin: 0;
+}
+
+li {
+    margin: 2mm 0;
+    font-size: 3.5mm;
+    line-height: 5mm;
+}
+
+/* ================= GAMES SECTION ================= */
+
+.games-section {
+    position: absolute;
+    top: 80mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+.games-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3mm;
+}
+
+.games-grid ul {
+    width: 48%;
+}
+
+/* ================= TECHNIQUES ================= */
+
+.techniques {
+    position: absolute;
+    top: 140mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* ================= QUOTE ================= */
+
+.quote {
+    position: absolute;
+    bottom: 50mm;
+    left: 20mm;
+    width: 100mm;
+
+    font-size: 4.5mm;
+    line-height: 6mm;
+}
+
+.quote span {
+    color: #e53935;
+    font-weight: bold;
+}
+
+/* ================= IMAGE ================= */
+
+.image {
+    position: absolute;
+    bottom: 40mm;
+    right: 20mm;
+}
+
+.image img {
+    width: 40mm;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.footer div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT STRIP */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- TITLE -->
+    <div class="title">RECOMMENDATION FOR APTITUDE</div>
+    <div class="subtitle">ENHANCEMENT</div>
+
+    <!-- BOOKS -->
+    <div class="content">
+        <ul>
+            <li>"A Modern Approach to Logical Reasoning" by R.S. Aggarwal</li>
+            <li>"Shortcuts in Reasoning" by Disha Experts</li>
+            <li>"Analytical Reasoning" by MK Pandey</li>
+        </ul>
+    </div>
+
+    <!-- GAMES -->
+    <div class="games-section">
+        <div class="section-title">Games, Puzzles & Apps</div>
+
+        <div class="games-grid">
+            <ul>
+                <li>Brain Wars</li>
+                <li>Lumosity</li>
+                <li>Elevate</li>
+                <li>Peak</li>
+            </ul>
+
+            <ul>
+                <li>NeuroNation</li>
+                <li>Sudoku</li>
+                <li>Brilliant</li>
+                <li>Crossword</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TECHNIQUES -->
+    <div class="techniques">
+        <div class="section-title">Techniques</div>
+        <ul>
+            <li>Study logical fallacies to evaluate arguments critically.</li>
+            <li>Break problems into smaller components.</li>
+            <li>Practice under timed conditions to improve speed and accuracy.</li>
+        </ul>
+    </div>
+
+    <!-- QUOTE -->
+    <div class="quote">
+        "<span>Aptitude</span> ignites potential,<br>
+        turning passion into purpose<br>
+        and dreams into reality."
+    </div>
+
+    <!-- IMAGE -->
+    <div class="image">
+        <img src="{{ url_for('static', filename='images/page7.png', _external=True) }}">
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div>
+
+</body>

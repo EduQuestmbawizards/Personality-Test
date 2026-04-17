@@ -1,0 +1,2932 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+/* ---------------- PRINT SETUP ---------------- */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+/* ---------------- RESET ---------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ---------------- PAGE WRAPPER ---------------- */
+.pdf-page {
+    width: 210mm;
+    height: 297mm;              /* 🔥 FIX: fixed height instead of min-height */
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;           /* 🔥 prevents overflow cutting */
+}
+
+/* last page fix */
+.pdf-page:last-child {
+    page-break-after: auto;
+}
+
+/* ---------------- CONTENT BOX ---------------- */
+.page-content {
+    width: 170mm;
+    margin: 0 auto;
+    padding: 10mm 0;            /* 🔥 gives safe top-bottom spacing */
+}
+
+/* ---------------- GLOBAL FIXES ---------------- */
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+}
+
+/* ---------------- AVOID PAGE BREAK ISSUES ---------------- */
+h1, h2, h3 {
+    page-break-after: avoid;
+}
+
+p, li {
+    page-break-inside: avoid;
+}
+
+/* optional: prevent sections breaking */
+.section {
+    page-break-inside: avoid;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="pdf-page"><div class="page-content"><style>
+
+/* BODY */
+body {
+    margin: 0;
+    padding: 0;
+    background: #2b2b2b;
+    font-family: Arial, sans-serif;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    overflow: hidden;
+    background: #f4f4f4;
+}
+
+/* BACKGROUND DESIGN */
+.page::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.04) 61%);
+    transform: rotate(25deg);
+    opacity: 0.4;
+}
+
+/* TOP LOGO */
+.logo-top {
+    position: absolute;
+    top: 12mm;
+    right: 12mm;
+    width: 28mm;
+}
+.logo-top img {
+    width: 100%;
+}
+
+/* TITLE */
+.main-title {
+    position: absolute;
+    top: 90mm;
+    left: 20mm;
+}
+.main-title h1 {
+    font-size: 85px;
+    line-height: 0.85;
+    margin: 0;
+    font-weight: 900;
+    color: #000;
+}
+
+/* GRID */
+.roadmap-grid {
+    position: absolute;
+    top: 150mm;
+    right: 20mm;
+    width: 320px;
+    height: 320px;
+}
+
+/* BOX */
+.box {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+/* BOX CONTENT */
+.box img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.box span {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+/* GRID POSITIONS */
+.box:nth-child(2) { top: 0; left: 0; }
+.box:nth-child(3) { top: 0; right: 0; }
+.box:nth-child(4) { bottom: 0; left: 0; }
+.box:nth-child(5) { bottom: 0; right: 0; }
+
+/* COLORS */
+.blue { background: #3d5593; color: white; }
+.gold { background: #d4b24c; color: black; }
+.pink { background: #b37c6f; color: white; }
+.red  { background: #e53935; color: white; }
+
+/* CENTER LOGO */
+.center-overlap {
+    position: absolute;
+    top: 145mm;
+    right: 85mm;
+
+    width: 70px;
+    height: 70px;
+    background: white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+.center-overlap img {
+    width: 80%;
+}
+
+/* REPORT TEXT */
+.report-title {
+    position: absolute;
+    bottom: 65mm;
+    left: 20mm;
+    font-size: 18px;
+    color: #777;
+}
+
+/* BOTTOM ICONS */
+.bottom-row {
+    position: absolute;
+    bottom: 25mm;
+    left: 20mm;
+    right: 20mm;
+}
+
+/* ICON */
+.icon-unit {
+    position: absolute;
+    width: 80px;
+    text-align: center;
+}
+
+/* POSITIONS */
+.icon-unit:nth-child(1) { left: 0mm; }
+.icon-unit:nth-child(2) { left: 32mm; }
+.icon-unit:nth-child(3) { left: 64mm; }
+.icon-unit:nth-child(4) { left: 96mm; }
+.icon-unit:nth-child(5) { left: 128mm; }
+.icon-unit:nth-child(6) { left: 160mm; }
+
+/* ICON BOX */
+.icon-bg {
+    width: 45px;
+    height: 45px;
+    background: #e53935;
+    border-radius: 10px;
+
+    margin: 0 auto 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-bg img {
+    width: 24px;
+    height: 24px;
+}
+
+.icon-unit p {
+    font-size: 10px;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* FOOTER */
+.footer-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, #3d5593 33%, #e53935 33%, #e53935 66%, #d4b24c 66%);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- LOGO -->
+    <div class="logo-top">
+        <img src="http://127.0.0.1:5000/static/images/logo-removebg-preview.png">
+    </div>
+
+    <!-- TITLE -->
+    <div class="main-title">
+        <h1>YOUR<br>CAREER<br>ROADMAP</h1>
+    </div>
+
+    <!-- GRID -->
+    <div class="roadmap-grid">
+
+        <div class="center-overlap">
+            <img src="http://127.0.0.1:5000/static/images/logo-removebg-preview.png">
+        </div>
+
+        <div class="box blue">
+            <img src="http://127.0.0.1:5000/static/images/career%20interest.png">
+            <span>Career<br>Interest</span>
+        </div>
+
+        <div class="box gold">
+            <img src="http://127.0.0.1:5000/static/images/aptitude.png">
+            <span>Aptitude</span>
+        </div>
+
+        <div class="box pink">
+            <img src="http://127.0.0.1:5000/static/images/skill.png">
+            <span>Skill</span>
+        </div>
+
+        <div class="box red">
+            <img src="http://127.0.0.1:5000/static/images/extra%20curricular.png">
+            <span>Extra<br>Curricular</span>
+        </div>
+
+    </div>
+
+    <!-- TEXT -->
+    <div class="report-title">Personalized Report</div>
+
+    <!-- ICON ROW -->
+    <div class="bottom-row">
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="http://127.0.0.1:5000/static/images/ladder.png"></div>
+            <p>Personalised Career Guidance</p>
+        </div>
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="http://127.0.0.1:5000/static/images/pin.png"></div>
+            <p>Academic & Advance Placement</p>
+        </div>
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="http://127.0.0.1:5000/static/images/check%20mark.png"></div>
+            <p>Upskilling & Certifications</p>
+        </div>
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="http://127.0.0.1:5000/static/images/university.png"></div>
+            <p>University Matchmaker</p>
+        </div>
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="http://127.0.0.1:5000/static/images/profile.png"></div>
+            <p>Profile Building</p>
+        </div>
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="http://127.0.0.1:5000/static/images/exam.png"></div>
+            <p>Entrance Exam</p>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-bar"></div>
+
+</div></div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* FULL PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    font-family: Arial, sans-serif;
+    background: #d9d9d9;
+    padding: 20mm;
+    box-sizing: border-box;
+}
+
+/* TITLE */
+.title {
+    position: absolute;
+    top: 20mm;
+    left: 20mm;
+    font-size: 26px;
+    font-weight: 900;
+}
+
+/* LOGO (TOP RIGHT) */
+.logo-top {
+    position: absolute;
+    top: 15mm;
+    right: 15mm;
+    width: 30mm;
+}
+
+.logo-top img {
+    width: 100%;
+    height: auto;
+}
+
+/* CAREER SECTION */
+.career-section {
+    position: absolute;
+    top: 60mm;
+    left: 20mm;
+    right: 20mm;
+}
+
+/* CARD */
+.career-card {
+    background: white;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.career-card h3 {
+    font-size: 15px;
+    margin: 0;
+}
+
+.career-card p {
+    font-size: 13px;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+/* UNIVERSITY */
+.uni-section {
+    position: absolute;
+    bottom: 40mm;
+    left: 20mm;
+    right: 20mm;
+}
+
+.uni-section h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.uni-item {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+/* FOOTER */
+.color-strip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    display: flex;
+}
+
+.color-strip div {
+    flex: 1;
+}
+
+.blue { background: #3f5ea8; }
+.red { background: #e53935; }
+.pink { background: #d81b60; }
+.orange { background: #fb8c00; }
+.lightblue { background: #42a5f5; }
+
+</style>
+
+
+<div class="page">
+
+    <!-- LOGO -->
+    <div class="logo-top">
+        <img src="http://127.0.0.1:5000/static/images/logo-removebg-preview.png">
+    </div>
+
+    <!-- TITLE -->
+    <div class="title">YOUR TOP CAREER MATCHES</div>
+
+    <!-- CAREERS -->
+    <div class="career-section">
+
+        <h3>Top Career Matches</h3>
+        <br>
+
+        
+        <div class="career-card">
+            <h3>Human Resources Manager</h3>
+            <p>Overseeing employee relations and company policies</p>
+        </div>
+        
+        <div class="career-card">
+            <h3>Event Planner</h3>
+            <p>Coordinating and planning events for clients</p>
+        </div>
+        
+        <div class="career-card">
+            <h3>Marketing Specialist</h3>
+            <p>Developing and implementing marketing campaigns</p>
+        </div>
+        
+        <div class="career-card">
+            <h3>Public Relations Specialist</h3>
+            <p>Managing the public image of a company or individual</p>
+        </div>
+        
+
+    </div>
+
+    <!-- UNIVERSITIES -->
+    <div class="uni-section">
+
+        <h3>UNIVERSITIES TO CONSIDER</h3>
+        <br>
+
+        
+        <div class="uni-item">
+            • Harvard University (USA)
+        </div>
+        
+        <div class="uni-item">
+            • University of Oxford (UK)
+        </div>
+        
+        <div class="uni-item">
+            • University of Melbourne (Australia)
+        </div>
+        
+        <div class="uni-item">
+            • University of Toronto (Canada)
+        </div>
+        
+        <div class="uni-item">
+            • University of Tokyo (Japan)
+        </div>
+        
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="color-strip">
+        <div class="blue"></div>
+        <div class="red"></div>
+        <div class="pink"></div>
+        <div class="orange"></div>
+        <div class="lightblue"></div>
+    </div>
+
+</div></div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* PAGE RESET (VERY IMPORTANT) */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    background: #e6e6e6;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* ================= STRIPS ================= */
+
+.strip {
+    position: absolute;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.top-strip { top: 0; }
+.bottom-strip { bottom: 0; }
+
+.strip div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT WIDTH */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+/* ================= CONTENT (FIXED) ================= */
+
+/* 🔥 PERFECT CENTER WITHOUT TRANSFORM */
+.content {
+    position: absolute;
+
+    width: 130mm;
+
+    /* (210 - 130) / 2 = 40mm */
+    left: 40mm;
+
+    /* visually centered */
+    top: 120mm;
+
+    text-align: center;
+}
+
+/* TITLE */
+.content h1 {
+    font-size: 7mm;
+    font-weight: 900;
+    margin-bottom: 6mm;
+}
+
+/* TEXT */
+.content p {
+    font-size: 8mm;
+    line-height: 6mm;
+    color: #333;
+}
+
+/* ================= DECORATIONS ================= */
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* LEFT */
+.orange1 {
+    width: 20mm;
+    height: 20mm;
+    left: -8mm;
+    top: 50mm;
+    background: linear-gradient(to right, orange, red);
+}
+
+/* RIGHT */
+.red1 {
+    width: 25mm;
+    height: 25mm;
+    right: -10mm;
+    top: 80mm;
+    background: linear-gradient(to right, red, purple);
+}
+
+/* BOTTOM LEFT */
+.blue1 {
+    width: 18mm;
+    height: 18mm;
+    left: 20mm;
+    bottom: 40mm;
+    background: linear-gradient(to right, #3f5ea8, #6ec6ff);
+}
+
+/* SMALL */
+.small1 {
+    width: 10mm;
+    height: 10mm;
+    right: 25mm;
+    bottom: 60mm;
+    background: #42a5f5;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- TOP STRIP -->
+    <div class="strip top-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+        <h1>FUTURISTIC INTERDISCIPLINARY CAREERS</h1>
+
+        <p>
+            Explore the forefront of interdisciplinary career possibilities.
+            This section reveals innovative career paths that blend diverse
+            skill sets and fields. Delve into the visionary roles transcending
+            traditional boundaries, revealing opportunities in cutting-edge
+            industries where multidisciplinary expertise is highly valued.
+        </p>
+    </div>
+
+    <!-- DECORATIONS -->
+    <div class="circle orange1"></div>
+    <div class="circle red1"></div>
+    <div class="circle blue1"></div>
+    <div class="circle small1"></div>
+
+    <!-- BOTTOM STRIP -->
+    <div class="strip bottom-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div></div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    background: #e6e6e6;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+/* TITLE */
+.title {
+    position: absolute;
+    top: 25mm;
+    left: 20mm;
+
+    font-size: 8mm;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 20mm;
+    right: 20mm;
+
+    width: 18mm;
+    height: 18mm;
+
+    border-radius: 50%;
+    border: 0.5mm solid red;
+    overflow: hidden;
+    background: white;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= CAREER CARDS ================= */
+
+.career-container {
+    position: absolute;
+    top: 70mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* CARD */
+.career-card {
+    position: relative;
+    width: 170mm;
+
+    background: white;
+    border-radius: 3mm;
+
+    padding: 4mm;
+    margin-bottom: 5mm;
+}
+
+/* TITLE */
+.career-card h3 {
+    margin: 0;
+    font-size: 4.5mm;
+}
+
+/* TEXT */
+.career-card p {
+    font-size: 3.5mm;
+    margin-top: 2mm;
+    line-height: 5mm;
+}
+
+/* ================= BOTTOM STRIP ================= */
+
+.bottom-strip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+/* STRIP BLOCKS */
+.bottom-strip div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT WIDTH */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- TITLE -->
+    <div class="title">
+        FUTURISTIC INTERDISCIPLINARY<br>
+        CAREERS
+    </div>
+
+    <!-- LOGO -->
+    <div class="logo">
+        <img src="http://127.0.0.1:5000/static/images/logo-removebg-preview.png">
+    </div>
+
+    <!-- CAREERS -->
+    <div class="career-container">
+
+        
+        <div class="career-card">
+            <h3>Virtual Reality Experience Designer</h3>
+            <p>Creating immersive virtual reality experiences</p>
+        </div>
+        
+        <div class="career-card">
+            <h3>Artificial Intelligence Engineer</h3>
+            <p>Developing and implementing AI systems</p>
+        </div>
+        
+        <div class="career-card">
+            <h3>Data Scientist</h3>
+            <p>Analyzing and interpreting complex data sets</p>
+        </div>
+        
+        <div class="career-card">
+            <h3>Sustainability Consultant</h3>
+            <p>Helping companies develop sustainable practices</p>
+        </div>
+        
+        <div class="career-card">
+            <h3>Cybersecurity Specialist</h3>
+            <p>Protecting computer systems from cyber threats</p>
+        </div>
+        
+
+    </div>
+
+    <!-- BOTTOM STRIP -->
+    <div class="bottom-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div></div></div>
+<div class="pdf-page"><div class="page-content"><!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    background: #efefef;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* ================= STRIPS ================= */
+
+.strip {
+    position: absolute;
+    width: 210mm;
+    height: 3mm;
+    left: 0;
+}
+
+.top-strip { top: 0; }
+.bottom-strip { bottom: 0; }
+
+.strip div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT WIDTH */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+/* ================= CONTENT ================= */
+
+.content {
+    position: absolute;
+
+    width: 130mm;
+    left: 40mm;   /* perfect horizontal center */
+    top: 120mm;   /* vertical balance */
+
+    text-align: center;
+}
+
+/* TITLES */
+.title-red {
+    color: #e53935;
+    font-size: 7mm;
+    font-weight: bold;
+}
+
+.title-black {
+    font-size: 8mm;
+    font-weight: bold;
+    margin-bottom: 6mm;
+}
+
+/* TEXT */
+.content p {
+    font-size: 8mm;
+    line-height: 6mm;
+    color: #333;
+}
+
+/* ================= DECORATIONS ================= */
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* ORANGE */
+.orange1 {
+    width: 22mm;
+    height: 22mm;
+    left: -8mm;
+    top: 90mm;
+    background: linear-gradient(to right, orange, red);
+}
+
+/* RED */
+.red1 {
+    width: 26mm;
+    height: 26mm;
+    right: -10mm;
+    top: 60mm;
+    background: linear-gradient(to right, red, purple);
+}
+
+/* BLUE */
+.blue1 {
+    width: 18mm;
+    height: 18mm;
+    left: 20mm;
+    bottom: 40mm;
+    background: linear-gradient(to right, #3f5ea8, #6ec6ff);
+}
+
+/* SMALL */
+.small1 {
+    width: 10mm;
+    height: 10mm;
+    right: 25mm;
+    bottom: 60mm;
+    background: #42a5f5;
+}
+
+/* ================= ICONS ================= */
+
+.icon {
+    position: absolute;
+    width: 10mm;
+}
+
+/* FIXED POSITIONS */
+.icon1 { top: 60mm; left: 25mm; }
+.icon2 { top: 140mm; right: 25mm; }
+.icon3 { bottom: 80mm; left: 30mm; }
+.icon4 { bottom: 50mm; right: 25mm; }
+
+/* ================= LIGHT CURVE ================= */
+
+.curve {
+    position: absolute;
+    width: 300mm;
+    height: 300mm;
+    top: -100mm;
+    left: -50mm;
+
+    background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.03) 61%);
+    transform: rotate(20deg);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- TOP STRIP -->
+    <div class="strip top-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+        <div class="title-red">APTITUDE</div>
+        <div class="title-black">ASSESSMENT</div>
+
+        <p>
+            <b>Aptitude</b> is a person's natural ability or potential to learn and excel
+            in certain areas without prior training. For high school students,
+            understanding their aptitudes can guide them towards suitable career
+            paths and academic choices. Recognizing one's strengths early helps in
+            making informed decisions about future studies and professions,
+            ensuring a more fulfilling and successful journey ahead.
+        </p>
+    </div>
+
+    <!-- DECORATIONS -->
+    <div class="circle orange1"></div>
+    <div class="circle red1"></div>
+    <div class="circle blue1"></div>
+    <div class="circle small1"></div>
+
+
+
+    <!-- CURVE -->
+    <div class="curve"></div>
+
+    <!-- BOTTOM STRIP -->
+    <div class="strip bottom-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div>
+
+</body>
+</html></div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #e6e6e6;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.title {
+    position: absolute;
+    top: 25mm;
+    left: 20mm;
+
+    font-size: 6mm;
+    font-weight: 800;
+}
+
+.subtitle {
+    position: absolute;
+    top: 33mm;
+    left: 20mm;
+
+    font-size: 5mm;
+    font-weight: bold;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 20mm;
+    right: 20mm;
+
+    width: 18mm;
+    height: 18mm;
+
+    border-radius: 50%;
+    border: 0.5mm solid red;
+    overflow: hidden;
+    background: white;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= CONTENT ================= */
+
+.strength-container {
+    position: absolute;
+    top: 80mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* CARD */
+.strength-card {
+    width: 170mm;
+
+    background: white;
+    border-radius: 3mm;
+
+    padding: 5mm;
+    margin-bottom: 6mm;
+}
+
+/* TITLE */
+.strength-card h3 {
+    margin: 0;
+    font-size: 4.5mm;
+}
+
+/* TEXT */
+.strength-card p {
+    margin-top: 2mm;
+    font-size: 3.5mm;
+    color: #444;
+    line-height: 5mm;
+}
+
+/* ================= FOOTER ================= */
+
+.bottom-strip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.bottom-strip div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT WIDTH */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <div class="title">APTITUDE ASSESSMENT</div>
+    <br>
+    <div class="subtitle">YOUR TOP 3 STRENGTHS</div>
+
+    <div class="logo">
+        <img src="http://127.0.0.1:5000/static/images/logo-removebg-preview.png">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="strength-container">
+
+        
+        <div class="strength-card">
+            <h3>Communication</h3>
+
+            
+        </div>
+        
+        <div class="strength-card">
+            <h3>Teamwork</h3>
+
+            
+        </div>
+        
+        <div class="strength-card">
+            <h3>Problem-Solving</h3>
+
+            
+        </div>
+        
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="bottom-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div></div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #f7f7f7;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= TITLE ================= */
+
+.title {
+    position: absolute;
+    top: 20mm;
+    left: 20mm;
+
+    font-size: 7mm;
+    font-weight: 900;
+}
+
+.subtitle {
+    position: absolute;
+    top: 30mm;
+    left: 20mm;
+
+    font-size: 6mm;
+    font-weight: 900;
+}
+
+/* ================= BOOKS ================= */
+
+.content {
+    position: absolute;
+    top: 48mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* SECTION TITLE */
+.section-title {
+    color: #e53935;
+    font-weight: bold;
+    font-size: 4mm;
+    margin-bottom: 2mm;
+}
+
+/* LIST */
+ul {
+    padding-left: 5mm;
+    margin: 0;
+}
+
+li {
+    margin: 2mm 0;
+    font-size: 3.5mm;
+    line-height: 5mm;
+}
+
+/* ================= GAMES SECTION ================= */
+
+.games-section {
+    position: absolute;
+    top: 80mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+.games-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3mm;
+}
+
+.games-grid ul {
+    width: 48%;
+}
+
+/* ================= TECHNIQUES ================= */
+
+.techniques {
+    position: absolute;
+    top: 140mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* ================= QUOTE ================= */
+
+.quote {
+    position: absolute;
+    bottom: 50mm;
+    left: 20mm;
+    width: 100mm;
+
+    font-size: 4.5mm;
+    line-height: 6mm;
+}
+
+.quote span {
+    color: #e53935;
+    font-weight: bold;
+}
+
+/* ================= IMAGE ================= */
+
+.image {
+    position: absolute;
+    bottom: 40mm;
+    right: 20mm;
+}
+
+.image img {
+    width: 40mm;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.footer div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT STRIP */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- TITLE -->
+    <div class="title">RECOMMENDATION FOR APTITUDE</div>
+    <div class="subtitle">ENHANCEMENT</div>
+
+    <!-- BOOKS -->
+    <div class="content">
+        <ul>
+            <li>"A Modern Approach to Logical Reasoning" by R.S. Aggarwal</li>
+            <li>"Shortcuts in Reasoning" by Disha Experts</li>
+            <li>"Analytical Reasoning" by MK Pandey</li>
+        </ul>
+    </div>
+
+    <!-- GAMES -->
+    <div class="games-section">
+        <div class="section-title">Games, Puzzles & Apps</div>
+
+        <div class="games-grid">
+            <ul>
+                <li>Brain Wars</li>
+                <li>Lumosity</li>
+                <li>Elevate</li>
+                <li>Peak</li>
+            </ul>
+
+            <ul>
+                <li>NeuroNation</li>
+                <li>Sudoku</li>
+                <li>Brilliant</li>
+                <li>Crossword</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TECHNIQUES -->
+    <div class="techniques">
+        <div class="section-title">Techniques</div>
+        <ul>
+            <li>Study logical fallacies to evaluate arguments critically.</li>
+            <li>Break problems into smaller components.</li>
+            <li>Practice under timed conditions to improve speed and accuracy.</li>
+        </ul>
+    </div>
+
+    <!-- QUOTE -->
+    <div class="quote">
+        "<span>Aptitude</span> ignites potential,<br>
+        turning passion into purpose<br>
+        and dreams into reality."
+    </div>
+
+    <!-- IMAGE -->
+    <div class="image">
+        <img src="http://127.0.0.1:5000/static/images/page7.png">
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div>
+
+</body></div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #f4f4f4;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= STRIPS ================= */
+
+.strip {
+    position: absolute;
+    width: 210mm;
+    height: 3mm;
+    left: 0;
+}
+
+.top-strip { top: 0; }
+.bottom-strip { bottom: 0; }
+
+.strip div {
+    position: absolute;
+    height: 3mm;
+}
+
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+/* ================= TITLE ================= */
+
+.title {
+    position: absolute;
+    top: 90mm;
+    left: 45mm;
+    width: 120mm;
+
+    font-size: 7mm;
+    font-weight: 800;
+    text-align: center;
+    color: #e53935;
+}
+
+/* ================= DESCRIPTION ================= */
+
+.description {
+    position: absolute;
+    top: 105mm;  /* BELOW TITLE */
+    left: 45mm;
+    width: 120mm;
+
+    font-size: 12mm;
+    color: #333;
+    line-height: 6mm;
+    text-align: center;
+}
+
+/* ================= DECORATIONS ================= */
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* LEFT TOP */
+.circle-left {
+    width: 18mm;
+    height: 18mm;
+    top: 70mm;
+    left: -5mm;
+    background: linear-gradient(45deg, orange, red);
+}
+
+/* LEFT BOTTOM */
+.circle-bottom-left {
+    width: 14mm;
+    height: 14mm;
+    bottom: 60mm;
+    left: 20mm;
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+}
+
+/* SMALL */
+.circle-small {
+    width: 10mm;
+    height: 10mm;
+    bottom: 90mm;
+    left: 60mm;
+    background: #4facfe;
+}
+
+/* RIGHT */
+.circle-right {
+    width: 22mm;
+    height: 22mm;
+    top: 80mm;
+    right: -8mm;
+    background: linear-gradient(45deg, red, purple);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- TOP STRIP -->
+    <div class="strip top-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+    <!-- TITLE -->
+    <div class="title">
+        SKILL ASSESSMENT
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="description">
+        Evaluate the depth and breadth of your skills. This section offers a thorough
+        assessment of your proficiencies, highlighting areas of expertise and potential
+        avenues for skill improvement. Explore a comprehensive analysis guiding you
+        towards areas where skill development could further enhance your profile.
+    </div>
+
+    <!-- DECORATIONS -->
+    <div class="circle circle-left"></div>
+    <div class="circle circle-bottom-left"></div>
+    <div class="circle circle-small"></div>
+    <div class="circle circle-right"></div>
+
+    <!-- BOTTOM STRIP -->
+    <div class="strip bottom-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div>
+</div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #f4f4f4;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.title {
+    position: absolute;
+    top: 25mm;
+    left: 20mm;
+
+    font-size: 6mm;
+    font-weight: 800;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 20mm;
+    right: 20mm;
+
+    width: 18mm;
+    height: 18mm;
+
+    border-radius: 50%;
+    border: 0.5mm solid red;
+    overflow: hidden;
+    background: white;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= CONTENT ================= */
+
+.content {
+    position: absolute;
+    top: 60mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* CARD */
+.skill-block {
+    width: 170mm;
+
+    background: white;
+    border-radius: 3mm;
+
+    padding: 5mm;
+    margin-bottom: 6mm;
+}
+
+/* TITLE */
+.skill-title {
+    font-size: 4.5mm;
+    font-weight: bold;
+}
+
+/* DESCRIPTION */
+.skill-desc {
+    margin-top: 2mm;
+    font-size: 3.5mm;
+    line-height: 5mm;
+    color: #333;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.footer div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT STRIP */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <div class="title">SKILL ASSESSMENT</div>
+
+    <div class="logo">
+        <img src="http://127.0.0.1:5000/static/images/logo-removebg-preview.png">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        
+        <div class="skill-block">
+            <div class="skill-title">Public Speaking</div>
+            <div class="skill-desc">Effectively communicating with audiences</div>
+        </div>
+        
+        <div class="skill-block">
+            <div class="skill-title">Project Management</div>
+            <div class="skill-desc">Planning and executing projects</div>
+        </div>
+        
+        <div class="skill-block">
+            <div class="skill-title">Marketing</div>
+            <div class="skill-desc">Promoting and selling products</div>
+        </div>
+        
+        <div class="skill-block">
+            <div class="skill-title">Data Analysis</div>
+            <div class="skill-desc">Interpreting and analyzing complex data sets</div>
+        </div>
+        
+        <div class="skill-block">
+            <div class="skill-title">Event Planning</div>
+            <div class="skill-desc">Coordinating and planning events</div>
+        </div>
+        
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div></div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #f4f4f4;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.title {
+    position: absolute;
+    top: 25mm;
+    left: 20mm;
+
+    font-size: 7mm;
+    font-weight: 900;
+    color: #e53935;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 20mm;
+    right: 20mm;
+
+    width: 18mm;
+    height: 18mm;
+
+    border-radius: 50%;
+    border: 0.5mm solid red;
+    overflow: hidden;
+    background: white;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= CONTENT ================= */
+
+.ai-content {
+    position: absolute;
+    top: 60mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* ATTRIBUTE */
+.attribute {
+    margin-bottom: 5mm;
+}
+
+.attribute-title {
+    font-size: 4.5mm;
+    font-weight: bold;
+}
+
+/* ================= QUOTE ================= */
+
+.quote {
+    position: absolute;
+    bottom: 50mm;
+    left: 20mm;
+    width: 100mm;
+
+    font-size: 4.5mm;
+    line-height: 6mm;
+}
+
+.quote span {
+    color: #e53935;
+    font-weight: bold;
+}
+
+/* ================= IMAGE ================= */
+
+.image {
+    position: absolute;
+    bottom: 40mm;
+    right: 20mm;
+}
+
+.image img {
+    width: 40mm;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.footer div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT STRIP */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <div class="title">YOUR TOP SKILL ATTRIBUTES</div>
+
+    <div class="logo">
+        <img src="http://127.0.0.1:5000/static/images/logo-removebg-preview.png">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="ai-content">
+
+        
+        <div class="attribute">
+            <div class="attribute-title">Communication</div>
+        </div>
+        
+        <div class="attribute">
+            <div class="attribute-title">Teamwork</div>
+        </div>
+        
+        <div class="attribute">
+            <div class="attribute-title">Problem-Solving</div>
+        </div>
+        
+        <div class="attribute">
+            <div class="attribute-title">Leadership</div>
+        </div>
+        
+        <div class="attribute">
+            <div class="attribute-title">Adaptability</div>
+        </div>
+        
+        <div class="attribute">
+            <div class="attribute-title">Time Management</div>
+        </div>
+        
+
+    </div>
+
+    <!-- QUOTE -->
+    <div class="quote">
+        "<span>Skills</span> are your super-power<br>
+        cultivate them and <span>Conquer<br>the World</span>"
+    </div>
+
+    <!-- IMAGE -->
+    <div class="image">
+        <img src="http://127.0.0.1:5000/static/images/page10.png">
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div></div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #f4f4f4;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= STRIPS ================= */
+
+.strip {
+    position: absolute;
+    width: 210mm;
+    height: 3mm;
+    left: 0;
+}
+
+.top-strip { top: 0; }
+.bottom-strip { bottom: 0; }
+
+.strip div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT WIDTH */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+/* ================= TITLES ================= */
+
+.title1 {
+    position: absolute;
+    top: 90mm;
+    left: 45mm;
+    width: 120mm;
+
+    font-size: 7mm;
+    font-weight: 900;
+    color: #e53935;
+    text-align: center;
+}
+
+.title2 {
+    position: absolute;
+    top: 100mm;
+    left: 45mm;
+    width: 120mm;
+
+    font-size: 7mm;
+    font-weight: 900;
+    text-align: center;
+}
+
+/* ================= TEXT ================= */
+
+.text {
+    position: absolute;
+    top: 115mm;
+    left: 45mm;
+    width: 120mm;
+
+    font-size: 8mm;
+    line-height: 6mm;
+    color: #333;
+    text-align: center;
+}
+
+/* ================= DECORATIONS ================= */
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* LEFT TOP */
+.left-shape {
+    width: 18mm;
+    height: 18mm;
+    top: 70mm;
+    left: -5mm;
+    background: linear-gradient(45deg, orange, red);
+}
+
+/* LEFT BOTTOM */
+.bottom-left {
+    width: 14mm;
+    height: 14mm;
+    bottom: 60mm;
+    left: 20mm;
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+}
+
+/* SMALL */
+.small-right {
+    width: 10mm;
+    height: 10mm;
+    bottom: 90mm;
+    left: 60mm;
+    background: #4facfe;
+}
+
+/* RIGHT */
+.right-shape {
+    width: 22mm;
+    height: 22mm;
+    top: 80mm;
+    right: -8mm;
+    background: linear-gradient(45deg, red, purple);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- TOP STRIP -->
+    <div class="strip top-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+    <!-- TITLES -->
+    <div class="title1">PROFILE BUILDING</div>
+    <div class="title2">ROADMAP</div>
+    <br>
+
+    <!-- TEXT -->
+    <div class="text">
+        Receive personalized recommendations to strengthen your profile. This section delivers
+        tailored guidance on skill enhancement, academic pursuits, and personal development.
+        Benefit from detailed insights and suggestions aimed at refining your profile and
+        maximizing your potential for success.
+    </div>
+
+    <!-- DECORATIONS -->
+    <div class="circle left-shape"></div>
+    <div class="circle bottom-left"></div>
+    <div class="circle small-right"></div>
+    <div class="circle right-shape"></div>
+
+    <!-- BOTTOM STRIP -->
+    <div class="strip bottom-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div></div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #f4f4f4;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+/* TITLE */
+.title {
+    position: absolute;
+    top: 20mm;
+    left: 20mm;
+
+    font-size: 7mm;
+    font-weight: 900;
+    color: #e53935;
+}
+
+/* SUBTITLE */
+.subtitle {
+    position: absolute;
+    top: 30mm;
+    left: 20mm;
+
+    font-size: 6mm;
+    font-weight: 900;
+}
+
+/* SECTION TEXT */
+.section-text {
+    position: absolute;
+    top: 38mm;
+    left: 20mm;
+
+    font-size: 4mm;
+    font-weight: bold;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 20mm;
+    right: 20mm;
+
+    width: 18mm;
+    height: 18mm;
+
+    border-radius: 50%;
+    border: 0.5mm solid red;
+    overflow: hidden;
+    background: white;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= CONTENT ================= */
+
+.ai-content {
+    position: absolute;
+    top: 60mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* CARD */
+.card {
+    width: 170mm;
+
+    background: white;
+    border-radius: 3mm;
+
+    padding: 5mm;
+    margin-bottom: 6mm;
+}
+
+/* TITLE */
+.card h3 {
+    margin: 0;
+    font-size: 4.5mm;
+}
+
+/* TEXT */
+.card p {
+    font-size: 3.5mm;
+    margin-top: 2mm;
+    line-height: 5mm;
+}
+
+/* ================= QUOTE ================= */
+
+.quote {
+    position: absolute;
+    bottom: 50mm;
+    left: 20mm;
+    width: 120mm;
+
+    font-size: 4.5mm;
+    line-height: 6mm;
+}
+
+.quote span {
+    color: #e53935;
+    font-weight: bold;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.footer div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT STRIP */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <div class="title">PROFILE BUILDING</div>
+    <div class="subtitle">RECOMMENDATIONS</div>
+    <div class="section-text">Academic Recommendations</div>
+
+    <div class="logo">
+        <img src="http://127.0.0.1:5000/static/images/logo-removebg-preview.png">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="ai-content">
+
+        
+        <div class="card">
+            <h3>Business Administration</h3>
+            <p>Studying business principles and practices</p>
+        </div>
+        
+        <div class="card">
+            <h3>Psychology</h3>
+            <p>Studying human behavior and mental processes</p>
+        </div>
+        
+        <div class="card">
+            <h3>Marketing</h3>
+            <p>Studying marketing principles and practices</p>
+        </div>
+        
+        <div class="card">
+            <h3>Computer Science</h3>
+            <p>Studying computer systems and programming</p>
+        </div>
+        
+
+    </div>
+
+    <!-- QUOTE -->
+    <div class="quote">
+        "The difference between<br>
+        <span>Ordinary</span> and <span>Extraordinary</span><br>
+        is that <span>little extra</span>"
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div></div></div>
+<div class="pdf-page"><div class="page-content"><style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page13 {
+    width: 210mm;
+    height: 297mm;
+    background: #f4f4f4;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.title {
+    position: absolute;
+    top: 20mm;
+    left: 20mm;
+
+    font-size: 6mm;
+    font-weight: 800;
+}
+
+.subtitle {
+    position: absolute;
+    top: 34mm;
+    left: 20mm;
+
+    font-size: 5.5mm;
+    font-weight: 800;
+}
+
+.section-text {
+    position: absolute;
+    top: 47mm;
+    left: 20mm;
+
+    font-size: 4mm;
+    font-weight: bold;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 20mm;
+    right: 20mm;
+
+    width: 18mm;
+    height: 18mm;
+
+    border-radius: 50%;
+    border: 0.5mm solid red;
+    overflow: hidden;
+    background: white;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= CONTENT ================= */
+
+.ai-content {
+    position: absolute;
+    top: 55mm;
+    left: 20mm;
+    width: 170mm;
+    height: 100mm;
+    overflow: hidden;
+}
+
+/* BLOCK */
+.ai-block {
+    margin-bottom: 5mm;
+}
+
+.ai-block h3 {
+    font-size: 4.5mm;
+    margin: 0;
+}
+
+.ai-block p {
+    font-size: 3.5mm;
+    margin-top: 2mm;
+    line-height: 5mm;
+    color: #333;
+}
+
+/* ================= TIP BOX ================= */
+
+.tip-box {
+    position: absolute;
+    top: 170mm;
+    left: 20mm;
+    width: 170mm;
+
+    background: linear-gradient(45deg, #ff3b2f, #ff7e3f);
+    border-radius: 4mm;
+
+    padding: 5mm;
+}
+
+/* TIP TITLE */
+.tip-title {
+    font-weight: bold;
+    font-size: 3.8mm;
+    margin-bottom: 2mm;
+}
+
+/* TIP TEXT */
+.tip-text {
+    font-size: 3.5mm;
+    line-height: 5mm;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.footer div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT STRIP */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page13">
+
+    <!-- HEADER -->
+    <div class="title">PROFILE BUILDING</div>
+    <div class="subtitle">RECOMMENDATIONS</div>
+    <div class="section-text">Entrance Exam Recommendations</div>
+
+    <div class="logo">
+        <img src="http://127.0.0.1:5000/static/images/logo-removebg-preview.png">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="ai-content">
+
+        
+        <div class="ai-block">
+            <h3>GMAT</h3>
+            <p>Graduate Management Admission Test</p>
+        </div>
+        
+        <div class="ai-block">
+            <h3>GRE</h3>
+            <p>Graduate Record Examination</p>
+        </div>
+        
+        <div class="ai-block">
+            <h3>SAT</h3>
+            <p>Scholastic Aptitude Test</p>
+        </div>
+        
+        <div class="ai-block">
+            <h3>ACT</h3>
+            <p>American College Testing</p>
+        </div>
+        
+
+    </div>
+
+    <!-- TIP BOX -->
+    <div class="tip-box">
+        <div class="tip-title">IMPORTANT TIP:</div>
+        <div class="tip-text">
+            Take SAT and you can apply to 50+ leading universities in India and avoid multiple entrance tests.
+            Visit our official website at <a href="https://www.eduquest.org.in">EduQuest    </a> for more. To navigate SAT preparation, reach out to EduQuest.
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div></div></div>
+<div class="pdf-page"><div class="page-content"><!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #f4f4f4;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= STRIPS ================= */
+
+.strip {
+    position: absolute;
+    width: 210mm;
+    height: 3mm;
+    left: 0;
+}
+
+.top-strip { top: 0; }
+.bottom-strip { bottom: 0; }
+
+.strip div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT WIDTH */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+/* ================= TITLE ================= */
+
+.title {
+    position: absolute;
+    top: 90mm;
+    left: 45mm;
+    width: 120mm;
+
+    font-size: 7mm;
+    font-weight: 900;
+    text-align: center;
+}
+
+/* ================= TEXT ================= */
+
+.text {
+    position: absolute;
+    top: 105mm;
+    left: 45mm;
+    width: 120mm;
+
+    font-size: 8mm;
+    line-height: 6mm;
+    color: #333;
+    text-align: center;
+}
+
+/* ================= DECORATIONS ================= */
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* LEFT TOP */
+.left-shape {
+    width: 18mm;
+    height: 18mm;
+    top: 70mm;
+    left: -5mm;
+    background: linear-gradient(45deg, orange, red);
+}
+
+/* LEFT BOTTOM */
+.bottom-left {
+    width: 14mm;
+    height: 14mm;
+    bottom: 60mm;
+    left: 20mm;
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+}
+
+/* SMALL */
+.small-right {
+    width: 10mm;
+    height: 10mm;
+    bottom: 90mm;
+    left: 60mm;
+    background: #4facfe;
+}
+
+/* RIGHT */
+.right-shape {
+    width: 22mm;
+    height: 22mm;
+    top: 80mm;
+    right: -8mm;
+    background: linear-gradient(45deg, red, purple);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- TOP STRIP -->
+    <div class="strip top-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+    <!-- TITLE -->
+    <div class="title">
+        SCHOLARSHIP INSIGHTS
+    </div>
+
+    <!-- TEXT -->
+    <div class="text">
+        Unlock the gateway to educational opportunities with our comprehensive scholarship guide 
+        in the EduQuest report. Discover information on top scholarships offered by prestigious 
+        global universities for undergraduate programs. Empower your academic journey with insights 
+        into funding options that align with your aspirations, ensuring a smoother path to higher education.
+    </div>
+
+    <!-- DECORATIONS -->
+    <div class="circle left-shape"></div>
+    <div class="circle bottom-left"></div>
+    <div class="circle small-right"></div>
+    <div class="circle right-shape"></div>
+
+    <!-- BOTTOM STRIP -->
+    <div class="strip bottom-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div>
+
+</body>
+</html></div></div>
+<div class="pdf-page"><div class="page-content"><!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #f4f4f4;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.title {
+    position: absolute;
+    top: 20mm;
+    left: 20mm;
+
+    font-size: 6mm;
+    font-weight: 800;
+}
+
+.section-text {
+    position: absolute;
+    top: 28mm;
+    left: 20mm;
+
+    font-size: 4mm;
+    font-weight: bold;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 20mm;
+    right: 20mm;
+
+    width: 18mm;
+    height: 18mm;
+
+    border-radius: 50%;
+    border: 0.5mm solid red;
+    overflow: hidden;
+    background: white;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= CONTENT ================= */
+
+.ai-content {
+    position: absolute;
+    top: 55mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* BLOCK */
+.scholarship-block {
+    margin-bottom: 5mm;
+}
+
+.scholarship-title {
+    font-size: 4.5mm;
+    font-weight: bold;
+}
+
+.scholarship-desc {
+    font-size: 3.5mm;
+    margin-top: 2mm;
+    line-height: 5mm;
+    color: #333;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.footer div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT STRIP */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <div class="title">SCHOLARSHIP INSIGHTS</div>
+    <div class="section-text">International Student Scholarships</div>
+
+    <div class="logo">
+        <img src="http://127.0.0.1:5000/static/images/logo-removebg-preview.png">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="ai-content">
+
+        
+        <div class="scholarship-block">
+            <div class="scholarship-title">Fulbright Scholarship</div>
+            <div class="scholarship-desc">Scholarship for international students</div>
+        </div>
+        
+        <div class="scholarship-block">
+            <div class="scholarship-title">Erasmus Mundus Scholarship</div>
+            <div class="scholarship-desc">Scholarship for European students</div>
+        </div>
+        
+        <div class="scholarship-block">
+            <div class="scholarship-title">Rhodes Scholarship</div>
+            <div class="scholarship-desc">Scholarship for international students</div>
+        </div>
+        
+        <div class="scholarship-block">
+            <div class="scholarship-title">National Merit Scholarship</div>
+            <div class="scholarship-desc">Scholarship for US students</div>
+        </div>
+        
+        <div class="scholarship-block">
+            <div class="scholarship-title">Gates Scholarship</div>
+            <div class="scholarship-desc">Scholarship for US students</div>
+        </div>
+        
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div>
+
+</body>
+</html></div></div>
+
+</body>
+</html>

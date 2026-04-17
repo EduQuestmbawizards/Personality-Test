@@ -1,0 +1,170 @@
+<style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    background: #f4f4f4;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.title {
+    position: absolute;
+    top: 25mm;
+    left: 20mm;
+
+    font-size: 7mm;
+    font-weight: 900;
+    color: #e53935;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 20mm;
+    right: 20mm;
+
+    width: 18mm;
+    height: 18mm;
+
+    border-radius: 50%;
+    border: 0.5mm solid red;
+    overflow: hidden;
+    background: white;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= CONTENT ================= */
+
+.ai-content {
+    position: absolute;
+    top: 60mm;
+    left: 20mm;
+    width: 170mm;
+}
+
+/* ATTRIBUTE */
+.attribute {
+    margin-bottom: 5mm;
+}
+
+.attribute-title {
+    font-size: 4.5mm;
+    font-weight: bold;
+}
+
+/* ================= QUOTE ================= */
+
+.quote {
+    position: absolute;
+    bottom: 50mm;
+    left: 20mm;
+    width: 100mm;
+
+    font-size: 4.5mm;
+    line-height: 6mm;
+}
+
+.quote span {
+    color: #e53935;
+    font-weight: bold;
+}
+
+/* ================= IMAGE ================= */
+
+.image {
+    position: absolute;
+    bottom: 40mm;
+    right: 20mm;
+}
+
+.image img {
+    width: 40mm;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.footer div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT STRIP */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <div class="title">YOUR TOP SKILL ATTRIBUTES</div>
+
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo-removebg-preview.png', _external=True) }}">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="ai-content">
+
+        {% for skill in data.top_skills[:6] %}
+        <div class="attribute">
+            <div class="attribute-title">{{ skill.title }}</div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- QUOTE -->
+    <div class="quote">
+        "<span>Skills</span> are your super-power<br>
+        cultivate them and <span>Conquer<br>the World</span>"
+    </div>
+
+    <!-- IMAGE -->
+    <div class="image">
+        <img src="{{ url_for('static', filename='images/page10.png', _external=True) }}">
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div>

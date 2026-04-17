@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Career Roadmap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #E8182A;
+      --navy: #1a1a2e;
+      --blue-accent: #2255CC;
+      --gold: #C8962A;
+      --mauve: #7D5A50;
+      --white: #ffffff;
+      --light-bg: #f0f0f0;
+      --diagonal-color: rgba(200,150,42,0.07);
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--light-bg);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    /* PAGE WRAPPER */
+    .page {
+      width: 100%;
+      max-width: 520px;
+      min-height: 100vh;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 60px rgba(0,0,0,0.15);
+    }
+
+    /* DIAGONAL BACKGROUND LINES */
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 44px,
+        var(--diagonal-color) 44px,
+        var(--diagonal-color) 46px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* HEADER */
+    header {
+      position: relative;
+      z-index: 2;
+      padding: 20px 24px 16px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .logo-badge {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      z-index: 2;
+      padding: 32px 28px 52px;
+      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%);
+      margin-bottom: -8px;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 3rem;
+      line-height: 1.0;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .hero-title span { display: block; }
+    .hero-title .accent { color: var(--red); }
+
+    /* QUADRANT CARDS */
+    .quadrant-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .quadrant-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      width: 210px;
+    }
+
+    .q-card {
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 8px;
+      text-align: center;
+      transition: transform 0.25s ease;
+      cursor: default;
+    }
+
+    .q-card:hover { transform: scale(1.06); }
+    .q-card .q-icon { font-size: 1.7rem; }
+    .q-card .q-label {
+      font-size: 0.62rem;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      line-height: 1.2;
+    }
+
+    .q-blue  { background: var(--blue-accent); }
+    .q-gold  { background: var(--gold); }
+    .q-mauve { background: var(--mauve); }
+    .q-red   { background: var(--red); }
+
+    /* Center logo overlay */
+    .center-logo {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px; height: 48px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      z-index: 3;
+      overflow: hidden;
+    }
+
+    .center-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      position: relative;
+      z-index: 2;
+      padding: 30px 28px 14px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* ICON GRID */
+    .icon-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px 12px;
+      padding: 0 24px 40px;
+      flex: 1;
+    }
+
+    .icon-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .icon-tile:hover { transform: translateY(-5px); }
+
+    .icon-box {
+      width: 72px; height: 72px;
+      background: var(--red);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 6px 20px rgba(232,24,42,0.28);
+      transition: box-shadow 0.2s;
+    }
+
+    .icon-tile:hover .icon-box {
+      box-shadow: 0 12px 30px rgba(232,24,42,0.40);
+    }
+
+    .icon-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #333;
+      text-align: center;
+      line-height: 1.35;
+      max-width: 82px;
+    }
+
+    /* BOTTOM BAR */
+    .bottom-bar {
+      position: relative;
+      z-index: 2;
+      height: 9px;
+      display: flex;
+      margin-top: auto;
+    }
+
+    .bottom-bar span { flex: 1; }
+    .bb-red    { background: var(--red); }
+    .bb-gold   { background: var(--gold); }
+    .bb-navy   { background: var(--navy); }
+    .bb-blue   { background: var(--blue-accent); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    header         { animation: fadeUp 0.45s ease both; }
+    .hero          { animation: fadeUp 0.5s 0.05s ease both; }
+    .section-label { animation: fadeUp 0.5s 0.18s ease both; }
+    .icon-grid     { animation: fadeUp 0.5s 0.28s ease both; }
+
+    .q-card { animation: fadeUp 0.4s ease both; }
+    .q-card:nth-child(1) { animation-delay: 0.08s; }
+    .q-card:nth-child(2) { animation-delay: 0.14s; }
+    .q-card:nth-child(3) { animation-delay: 0.20s; }
+    .q-card:nth-child(4) { animation-delay: 0.26s; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-badge">
+      <!-- Your uploaded logo is embedded here -->
+      <img src="1775549911117_image.png" alt="EduQuest Logo"
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:0.5rem;font-weight:800;color:#E8182A;text-align:center;line-height:1.1\'>Edu<br>Quest</span>';" />
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-title">
+        <span>YOUR</span>
+        <span class="accent">CAREER</span>
+        <span>&nbsp;</span>
+        <span>ROADMAP</span>
+      </div>
+
+      <div class="quadrant-wrap">
+        <div class="quadrant-grid">
+          <div class="q-card q-blue">
+            <div class="q-icon">🎯</div>
+            <div class="q-label">Career<br>Interest</div>
+          </div>
+          <div class="q-card q-gold">
+            <div class="q-icon">🔍</div>
+            <div class="q-label">Aptitude</div>
+          </div>
+          <div class="q-card q-mauve">
+            <div class="q-icon">💡</div>
+            <div class="q-label">Skill</div>
+          </div>
+          <div class="q-card q-red">
+            <div class="q-icon">⭐</div>
+            <div class="q-label">Extra<br>Curricular</div>
+          </div>
+        </div>
+        <div class="center-logo">
+          <img src="1775549911117_image.png" alt="EduQuest"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:0.4rem;font-weight:800;color:#E8182A;text-align:center\'>Edu<br>Quest</span>';" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ICON TILES -->
+  <p class="section-label">Personalized Report</p>
+
+  <div class="icon-grid">
+    <div class="icon-tile">
+      <div class="icon-box">📋</div>
+      <div class="icon-label">Personalised Career Guidance</div>
+    </div>
+    <div class="icon-tile">
+      <div class="icon-box">📍</div>
+      <div class="icon-label">Academic &amp; Advance Placement</div>
+    </div>
+    <div class="icon-tile">
+      <div class="icon-box">✅</div>
+      <div class="icon-label">Upskilling &amp; Certifications</div>
+    </div>
+    <div class="icon-tile">
+      <div class="icon-box">🎓</div>
+      <div class="icon-label">University Matchmaker</div>
+    </div>
+    <div class="icon-tile">
+      <div class="icon-box">👤</div>
+      <div class="icon-label">Profile Building</div>
+    </div>
+    <div class="icon-tile">
+      <div class="icon-box">📝</div>
+      <div class="icon-label">Entrance Exam</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="bottom-bar">
+    <span class="bb-red"></span>
+    <span class="bb-gold"></span>
+    <span class="bb-navy"></span>
+    <span class="bb-blue"></span>
+  </div>
+
+</div>
+</body>
+</html>

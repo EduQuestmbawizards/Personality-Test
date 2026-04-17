@@ -1,0 +1,280 @@
+<style>
+
+/* BODY */
+body {
+    margin: 0;
+    padding: 0;
+    background: #2b2b2b;
+    font-family: Arial, sans-serif;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    overflow: hidden;
+    background: #f4f4f4;
+}
+
+/* BACKGROUND DESIGN */
+.page::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.04) 61%);
+    transform: rotate(25deg);
+    opacity: 0.4;
+}
+
+/* TOP LOGO */
+.logo-top {
+    position: absolute;
+    top: 12mm;
+    right: 12mm;
+    width: 28mm;
+}
+.logo-top img {
+    width: 100%;
+}
+
+/* TITLE */
+.main-title {
+    position: absolute;
+    top: 90mm;
+    left: 20mm;
+}
+.main-title h1 {
+    font-size: 85px;
+    line-height: 0.85;
+    margin: 0;
+    font-weight: 900;
+    color: #000;
+}
+
+/* GRID */
+.roadmap-grid {
+    position: absolute;
+    top: 150mm;
+    right: 20mm;
+    width: 320px;
+    height: 320px;
+}
+
+/* BOX */
+.box {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+/* BOX CONTENT */
+.box img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.box span {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+/* GRID POSITIONS */
+.box:nth-child(2) { top: 0; left: 0; }
+.box:nth-child(3) { top: 0; right: 0; }
+.box:nth-child(4) { bottom: 0; left: 0; }
+.box:nth-child(5) { bottom: 0; right: 0; }
+
+/* COLORS */
+.blue { background: #3d5593; color: white; }
+.gold { background: #d4b24c; color: black; }
+.pink { background: #b37c6f; color: white; }
+.red  { background: #e53935; color: white; }
+
+/* CENTER LOGO */
+.center-overlap {
+    position: absolute;
+    top: 145mm;
+    right: 85mm;
+
+    width: 70px;
+    height: 70px;
+    background: white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+.center-overlap img {
+    width: 80%;
+}
+
+/* REPORT TEXT */
+.report-title {
+    position: absolute;
+    bottom: 65mm;
+    left: 20mm;
+    font-size: 18px;
+    color: #777;
+}
+
+/* BOTTOM ICONS */
+.bottom-row {
+    position: absolute;
+    bottom: 25mm;
+    left: 20mm;
+    right: 20mm;
+}
+
+/* ICON */
+.icon-unit {
+    position: absolute;
+    width: 80px;
+    text-align: center;
+}
+
+/* POSITIONS */
+.icon-unit:nth-child(1) { left: 0mm; }
+.icon-unit:nth-child(2) { left: 32mm; }
+.icon-unit:nth-child(3) { left: 64mm; }
+.icon-unit:nth-child(4) { left: 96mm; }
+.icon-unit:nth-child(5) { left: 128mm; }
+.icon-unit:nth-child(6) { left: 160mm; }
+
+/* ICON BOX */
+.icon-bg {
+    width: 45px;
+    height: 45px;
+    background: #e53935;
+    border-radius: 10px;
+
+    margin: 0 auto 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-bg img {
+    width: 24px;
+    height: 24px;
+}
+
+.icon-unit p {
+    font-size: 10px;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* FOOTER */
+.footer-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, #3d5593 33%, #e53935 33%, #e53935 66%, #d4b24c 66%);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- LOGO -->
+    <div class="logo-top">
+        <img src="{{ url_for('static', filename='images/logo-removebg-preview.png', _external=True) }}">
+    </div>
+
+    <!-- TITLE -->
+    <div class="main-title">
+        <h1>YOUR<br>CAREER<br>ROADMAP</h1>
+    </div>
+
+    <!-- GRID -->
+    <div class="roadmap-grid">
+
+        <div class="center-overlap">
+            <img src="{{ url_for('static', filename='images/logo-removebg-preview.png', _external=True) }}">
+        </div>
+
+        <div class="box blue">
+            <img src="{{ url_for('static', filename='images/career interest.png', _external=True) }}">
+            <span>Career<br>Interest</span>
+        </div>
+
+        <div class="box gold">
+            <img src="{{ url_for('static', filename='images/aptitude.png', _external=True) }}">
+            <span>Aptitude</span>
+        </div>
+
+        <div class="box pink">
+            <img src="{{ url_for('static', filename='images/skill.png', _external=True) }}">
+            <span>Skill</span>
+        </div>
+
+        <div class="box red">
+            <img src="{{ url_for('static', filename='images/extra curricular.png', _external=True) }}">
+            <span>Extra<br>Curricular</span>
+        </div>
+
+    </div>
+
+    <!-- TEXT -->
+    <div class="report-title">Personalized Report</div>
+
+    <!-- ICON ROW -->
+    <div class="bottom-row">
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="{{ url_for('static', filename='images/ladder.png', _external=True) }}"></div>
+            <p>Personalised Career Guidance</p>
+        </div>
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="{{ url_for('static', filename='images/pin.png', _external=True) }}"></div>
+            <p>Academic & Advance Placement</p>
+        </div>
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="{{ url_for('static', filename='images/check mark.png', _external=True) }}"></div>
+            <p>Upskilling & Certifications</p>
+        </div>
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="{{ url_for('static', filename='images/university.png', _external=True) }}"></div>
+            <p>University Matchmaker</p>
+        </div>
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="{{ url_for('static', filename='images/profile.png', _external=True) }}"></div>
+            <p>Profile Building</p>
+        </div>
+
+        <div class="icon-unit">
+            <div class="icon-bg"><img src="{{ url_for('static', filename='images/exam.png', _external=True) }}"></div>
+            <p>Entrance Exam</p>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-bar"></div>
+
+</div>

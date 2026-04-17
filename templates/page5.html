@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    background: #efefef;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* ================= STRIPS ================= */
+
+.strip {
+    position: absolute;
+    width: 210mm;
+    height: 3mm;
+    left: 0;
+}
+
+.top-strip { top: 0; }
+.bottom-strip { bottom: 0; }
+
+.strip div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT WIDTH */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+/* ================= CONTENT ================= */
+
+.content {
+    position: absolute;
+
+    width: 130mm;
+    left: 40mm;   /* perfect horizontal center */
+    top: 120mm;   /* vertical balance */
+
+    text-align: center;
+}
+
+/* TITLES */
+.title-red {
+    color: #e53935;
+    font-size: 8mm;
+    font-weight: bold;
+}
+
+.title-black {
+    font-size: 10mm;
+    font-weight: bold;
+    margin-bottom: 10mm;
+}
+
+/* TEXT */
+.content p {
+    font-size: 5mm;     
+    line-height: 8mm;     
+    color: #333;
+
+    padding: 0 5mm;        
+}
+
+/* ================= DECORATIONS ================= */
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* ORANGE */
+.orange1 {
+    width: 22mm;
+    height: 22mm;
+    left: -8mm;
+    top: 90mm;
+    background: linear-gradient(to right, orange, red);
+}
+
+/* RED */
+.red1 {
+    width: 26mm;
+    height: 26mm;
+    right: -10mm;
+    top: 60mm;
+    background: linear-gradient(to right, red, purple);
+}
+
+/* BLUE */
+.blue1 {
+    width: 18mm;
+    height: 18mm;
+    left: 20mm;
+    bottom: 40mm;
+    background: linear-gradient(to right, #3f5ea8, #6ec6ff);
+}
+
+/* SMALL */
+.small1 {
+    width: 10mm;
+    height: 10mm;
+    right: 25mm;
+    bottom: 60mm;
+    background: #42a5f5;
+}
+
+/* ================= ICONS ================= */
+
+.icon {
+    position: absolute;
+    width: 10mm;
+}
+
+/* FIXED POSITIONS */
+.icon1 { top: 60mm; left: 25mm; }
+.icon2 { top: 140mm; right: 25mm; }
+.icon3 { bottom: 80mm; left: 30mm; }
+.icon4 { bottom: 50mm; right: 25mm; }
+
+/* ================= LIGHT CURVE ================= */
+
+.curve {
+    position: absolute;
+    width: 300mm;
+    height: 300mm;
+    top: -100mm;
+    left: -50mm;
+
+    background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.03) 61%);
+    transform: rotate(20deg);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- TOP STRIP -->
+    <div class="strip top-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+        <div class="title-red">APTITUDE</div>
+        <div class="title-black">ASSESSMENT</div>
+
+        <p>
+            <b>Aptitude</b> is a person's natural ability or potential to learn and excel
+            in certain areas without prior training. For high school students,
+            understanding their aptitudes can guide them towards suitable career
+            paths and academic choices. Recognizing one's strengths early helps in
+            making informed decisions about future studies and professions,
+            ensuring a more fulfilling and successful journey ahead.
+        </p>
+    </div>
+
+    <!-- DECORATIONS -->
+    <div class="circle orange1"></div>
+    <div class="circle red1"></div>
+    <div class="circle blue1"></div>
+    <div class="circle small1"></div>
+
+
+
+    <!-- CURVE -->
+    <div class="curve"></div>
+
+    <!-- BOTTOM STRIP -->
+    <div class="strip bottom-strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div>
+
+</body>
+</html>

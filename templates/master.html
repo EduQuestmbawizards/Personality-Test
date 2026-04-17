@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+/* ---------------- PRINT SETUP ---------------- */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+/* ---------------- RESET ---------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ---------------- PAGE WRAPPER ---------------- */
+.pdf-page {
+    width: 210mm;
+    height: 297mm;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+}
+
+/* last page fix */
+.pdf-page:last-child {
+    page-break-after: auto;
+}
+
+/* ---------------- CONTENT BOX ---------------- */
+.page-content {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ---------------- GLOBAL FIXES ---------------- */
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+}
+
+/* ---------------- AVOID PAGE BREAK ISSUES ---------------- */
+h1, h2, h3 {
+    page-break-after: avoid;
+}
+
+p, li {
+    page-break-inside: avoid;
+}
+
+/* optional: prevent sections breaking */
+.section {
+    page-break-inside: avoid;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="pdf-page"><div class="page-content">{% include "page1.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page2.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page3.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page4.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page5.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page6.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page7.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page8.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page9.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page10.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page11.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page12.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page13.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page14.html" %}</div></div>
+<div class="pdf-page"><div class="page-content">{% include "page15.html" %}</div></div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+langgraph
+langchain
+langchain-core
+
+dotenv
+flask
+pydantic
+playwright
+openai
+gunicorn

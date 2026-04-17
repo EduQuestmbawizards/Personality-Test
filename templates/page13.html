@@ -1,0 +1,195 @@
+<style>
+
+/* RESET */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* PAGE */
+.page13 {
+    width: 210mm;
+    height: 297mm;
+    background: #f4f4f4;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.title {
+    position: absolute;
+    top: 20mm;
+    left: 20mm;
+
+    font-size: 6mm;
+    font-weight: 800;
+}
+
+.subtitle {
+    position: absolute;
+    top: 34mm;
+    left: 20mm;
+
+    font-size: 5.5mm;
+    font-weight: 800;
+}
+
+.section-text {
+    position: absolute;
+    top: 47mm;
+    left: 20mm;
+
+    font-size: 4mm;
+    font-weight: bold;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    top: 20mm;
+    right: 20mm;
+
+    width: 18mm;
+    height: 18mm;
+
+    border-radius: 50%;
+    border: 0.5mm solid red;
+    overflow: hidden;
+    background: white;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ================= CONTENT ================= */
+
+.ai-content {
+    position: absolute;
+    top: 55mm;
+    left: 20mm;
+    width: 170mm;
+    height: 100mm;
+    overflow: hidden;
+}
+
+/* BLOCK */
+.ai-block {
+    margin-bottom: 5mm;
+}
+
+.ai-block h3 {
+    font-size: 4.5mm;
+    margin: 0;
+}
+
+.ai-block p {
+    font-size: 3.5mm;
+    margin-top: 2mm;
+    line-height: 5mm;
+    color: #333;
+}
+
+/* ================= TIP BOX ================= */
+
+.tip-box {
+    position: absolute;
+    top: 170mm;
+    left: 20mm;
+    width: 170mm;
+
+    background: linear-gradient(45deg, #ff3b2f, #ff7e3f);
+    border-radius: 4mm;
+
+    padding: 5mm;
+}
+
+/* TIP TITLE */
+.tip-title {
+    font-weight: bold;
+    font-size: 3.8mm;
+    margin-bottom: 2mm;
+}
+
+/* TIP TEXT */
+.tip-text {
+    font-size: 3.5mm;
+    line-height: 5mm;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 210mm;
+    height: 3mm;
+}
+
+.footer div {
+    position: absolute;
+    height: 3mm;
+}
+
+/* EXACT STRIP */
+.s1 { left: 0mm;   width: 42mm; background: #3f5ea8; }
+.s2 { left: 42mm;  width: 42mm; background: #e53935; }
+.s3 { left: 84mm;  width: 42mm; background: #d81b60; }
+.s4 { left: 126mm; width: 42mm; background: #fb8c00; }
+.s5 { left: 168mm; width: 42mm; background: #42a5f5; }
+
+</style>
+</head>
+
+<body>
+
+<div class="page13">
+
+    <!-- HEADER -->
+    <div class="title">PROFILE BUILDING</div>
+    <div class="subtitle">RECOMMENDATIONS</div>
+    <div class="section-text">Entrance Exam Recommendations</div>
+
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo-removebg-preview.png', _external=True) }}">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="ai-content">
+
+        {% for exam in data.exams[:4] %}
+        <div class="ai-block">
+            <h3>{{ exam.title }}</h3>
+            <p>{{ exam.description }}</p>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- TIP BOX -->
+    <div class="tip-box">
+        <div class="tip-title">IMPORTANT TIP:</div>
+        <div class="tip-text">
+            Take SAT and you can apply to 50+ leading universities in India and avoid multiple entrance tests.
+            Visit our official website at <a href="https://www.eduquest.org.in">EduQuest    </a> for more. To navigate SAT preparation, reach out to EduQuest.
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+        <div class="s4"></div>
+        <div class="s5"></div>
+    </div>
+
+</div>

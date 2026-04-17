@@ -1,0 +1,152 @@
+<style>
+
+/* FULL PAGE */
+.page {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    font-family: Arial, sans-serif;
+    background: #d9d9d9;
+    padding: 20mm;
+    box-sizing: border-box;
+}
+
+/* TITLE */
+.title {
+    position: absolute;
+    top: 20mm;
+    left: 20mm;
+    font-size: 26px;
+    font-weight: 900;
+}
+
+/* LOGO (TOP RIGHT) */
+.logo-top {
+    position: absolute;
+    top: 15mm;
+    right: 15mm;
+    width: 30mm;
+}
+
+.logo-top img {
+    width: 100%;
+    height: auto;
+}
+
+/* CAREER SECTION */
+.career-section {
+    position: absolute;
+    top: 60mm;
+    left: 20mm;
+    right: 20mm;
+}
+
+/* CARD */
+.career-card {
+    background: white;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.career-card h3 {
+    font-size: 15px;
+    margin: 0;
+}
+
+.career-card p {
+    font-size: 13px;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+/* UNIVERSITY */
+.uni-section {
+    position: absolute;
+    bottom: 40mm;
+    left: 20mm;
+    right: 20mm;
+}
+
+.uni-section h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.uni-item {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+/* FOOTER */
+.color-strip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    display: flex;
+}
+
+.color-strip div {
+    flex: 1;
+}
+
+.blue { background: #3f5ea8; }
+.red { background: #e53935; }
+.pink { background: #d81b60; }
+.orange { background: #fb8c00; }
+.lightblue { background: #42a5f5; }
+
+</style>
+
+
+<div class="page">
+
+    <!-- LOGO -->
+    <div class="logo-top">
+        <img src="{{ url_for('static', filename='images/logo-removebg-preview.png', _external=True) }}">
+    </div>
+
+    <!-- TITLE -->
+    <div class="title">YOUR TOP CAREER MATCHES</div>
+
+    <!-- CAREERS -->
+    <div class="career-section">
+
+        <h3>Top Career Matches</h3>
+        <br>
+
+        {% for career in data.career_matches[:4] %}
+        <div class="career-card">
+            <h3>{{ career.title }}</h3>
+            <p>{{ career.description }}</p>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- UNIVERSITIES -->
+    <div class="uni-section">
+
+        <h3>UNIVERSITIES TO CONSIDER</h3>
+        <br>
+
+        {% for uni in data.universities[:5] %}
+        <div class="uni-item">
+            • {{ uni.name }} ({{ uni.country }})
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="color-strip">
+        <div class="blue"></div>
+        <div class="red"></div>
+        <div class="pink"></div>
+        <div class="orange"></div>
+        <div class="lightblue"></div>
+    </div>
+
+</div>
