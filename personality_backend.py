@@ -1,5 +1,4 @@
 from dotenv import load_dotenv
-from langchain_groq import ChatGroq
 from langchain_openai import ChatOpenAI
 import os
 import json
@@ -10,10 +9,7 @@ from question import questions
 load_dotenv(".env")
 
 # ---------------- LLM ----------------
-# llm = ChatGroq(
-#     model="llama-3.3-70b-versatile",
-#     api_key=os.getenv("GROQ_API_KEY")
-# )
+
 llm = ChatOpenAI(
     model="gpt-4o-mini",
     api_key=os.getenv("OPENAI_API_KEY"),
